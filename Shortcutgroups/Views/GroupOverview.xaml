@@ -1,0 +1,54 @@
+﻿<UserControl x:Class="Shortcutgroups.Views.GroupOverview"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d"
+             d:DesignHeight="760"
+             d:DesignWidth="590">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="60" />
+        </Grid.RowDefinitions>
+        <Label Content="Shortcutgroups - Group Overview"
+               Foreground="White"
+               Padding="0"
+               FontSize="24" />
+        <Label Grid.Row="1"
+               Content="Group your programs and access them via shortcuts"
+               Foreground="DarkGray"
+               Padding="0"
+               FontSize="16" />
+        <ScrollViewer Grid.Row="2"
+                      Margin="0,10"
+                      VerticalScrollBarVisibility="Auto">
+            <StackPanel Name="Groups" />
+        </ScrollViewer>
+        <Grid Name="BtnAddGroup"
+              Grid.Row="3"
+              Background="Transparent"
+              MouseEnter="BtnAddGroup_MouseEnter"
+              MouseLeave="BtnAddGroup_MouseLeave"
+              MouseLeftButtonUp="BtnAddGroup_MouseUp">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="60" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+            <Image Grid.Column="1"
+                   Source="/Shortcutgroups;component/Resources/AddWhite.png"
+                   Height="40"
+                   Width="40" />
+            <Label Grid.Column="2"
+                   Content="Add shortcut group"
+                   Foreground="White"
+                   VerticalContentAlignment="Center"
+                   Padding="0"
+                   FontSize="16" />
+        </Grid>
+    </Grid>
+</UserControl>

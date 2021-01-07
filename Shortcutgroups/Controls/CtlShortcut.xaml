@@ -1,0 +1,18 @@
+﻿<UserControl x:Class="Shortcutgroups.Controls.CtlShortcut"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d"
+             Name="ControlShortcut"
+             d:DesignHeight="50"
+             d:DesignWidth="50"
+             Background="Transparent"
+             MouseEnter="ControlShortcut_MouseEnter"
+             MouseLeave="ControlShortcut_MouseLeave"
+             MouseLeftButtonUp="ControlShortcut_MouseUp">
+    <Image Name="ImgShortcut"
+           Height="30"
+           Width="30"
+           Margin="10" />
+</UserControl>

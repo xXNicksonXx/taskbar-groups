@@ -1,0 +1,18 @@
+﻿<Window x:Class="Shortcutgroups.Windows.Shortcutgroup"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Shortcutgroup"
+        Height="50"
+        Width="500"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="#FF282828"
+        Deactivated="Window_Deactivated"
+        KeyDown="Window_KeyDown"
+        KeyUp="Window_KeyUp">
+    <WrapPanel Name="Shortcuts"
+               Orientation="Horizontal" />
+</Window>

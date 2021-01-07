@@ -1,0 +1,333 @@
+﻿<UserControl x:Class="Shortcutgroups.Views.GroupEditor"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:dd="urn:gong-wpf-dragdrop"
+             mc:Ignorable="d"
+             d:DesignHeight="760"
+             d:DesignWidth="590">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="51" />
+            <RowDefinition Height="20" />
+            <RowDefinition Height="70" />
+            <RowDefinition Height="20" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="20" />
+            <RowDefinition Height="80" />
+            <RowDefinition Height="20" />
+            <RowDefinition Height="150" />
+            <RowDefinition Height="20" />
+            <RowDefinition Height="30" />
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="60" />
+                <ColumnDefinition Width="30" />
+            </Grid.ColumnDefinitions>
+            <StackPanel>
+                <Label Name="LblErrorTitle"
+                       Content="Error Message"
+                       Foreground="Red"
+                       Padding="0"
+                       Visibility="Hidden" />
+                <TextBox Name="InpGroupName"
+                         FontSize="24"
+                         MaxLength="30"
+                         Foreground="White"
+                         CaretBrush="White"
+                         BorderThickness="0"
+                         TextChanged="InpGroupName_TextChanged">
+                    <TextBox.Background>
+                        <ImageBrush ImageSource="/Shortcutgroups;component/Resources/GroupNamePlaceholder.png"
+                                    Stretch="None"
+                                    AlignmentX="Left">
+                            <ImageBrush.Transform>
+                                <TransformGroup>
+                                    <ScaleTransform ScaleY="0.75"
+                                                    ScaleX="0.75" />
+                                    <TranslateTransform X="-4"
+                                                        Y="8" />
+                                </TransformGroup>
+                            </ImageBrush.Transform>
+                        </ImageBrush>
+                    </TextBox.Background>
+                </TextBox>
+            </StackPanel>
+            <Label Grid.Column="1"
+                   Content="Width:"
+                   Foreground="White"
+                   FontSize="16"
+                   HorizontalContentAlignment="Center"
+                   VerticalContentAlignment="Center" />
+            <StackPanel Grid.Column="2">
+                <Image Name="BtnWidthUp"
+                       Source="/Shortcutgroups;component/Resources/ArrowWhite.png"
+                       MouseLeftButtonUp="BtnWidthUp_MouseUp"
+                       MouseLeftButtonDown="BtnWidthUp_MouseDown"
+                       Margin="5,0" />
+                <Label Name="LblWidth"
+                       Content="1"
+                       FontSize="16"
+                       Foreground="White"
+                       HorizontalContentAlignment="Center" />
+                <Image Name="BtnWidthDown"
+                       Source="/Shortcutgroups;component/Resources/ArrowWhite.png"
+                       MouseLeftButtonUp="BtnWidthDown_MouseUp"
+                       MouseLeftButtonDown="BtnWidthDown_MouseDown"
+                       Margin="5,0"
+                       RenderTransformOrigin="0.5,0.5">
+                    <Image.RenderTransform>
+                        <TransformGroup>
+                            <RotateTransform Angle="180" />
+                        </TransformGroup>
+                    </Image.RenderTransform>
+                </Image>
+            </StackPanel>
+        </Grid>
+        <Separator Grid.Row="1"
+                   Background="White" />
+        <Grid Grid.Row="2"
+              Name="BtnAddGroupIcon"
+              Background="Transparent"
+              AllowDrop="True"
+              MouseEnter="BtnAddGroupIcon_MouseEnter"
+              MouseLeave="BtnAddGroupIcon_MouseLeave"
+              MouseLeftButtonUp="BtnAddGroupIcon_MouseUp"
+              Drop="BtnAddGroupIcon_Drop">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="70" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+            <Image Name="ImgGroupIcon"
+                   Source="/Shortcutgroups;component/Resources/AddWhite.png"
+                   Height="50"
+                   Width="50" />
+            <StackPanel Grid.Column="1">
+                <Label Name="LblErrorIcon"
+                       Content="Error Message"
+                       Foreground="Red"
+                       Padding="0"
+                       Visibility="Hidden" />
+                <Label Content="Change group icon"
+                       FontSize="16"
+                       Foreground="White"
+                       Padding="0,8,0,0" />
+            </StackPanel>
+        </Grid>
+        <Separator Grid.Row="3"
+                   Background="White" />
+        <ScrollViewer Grid.Row="4"
+                      VerticalScrollBarVisibility="Auto">
+            <ItemsControl Name="PnlShortcuts"
+                          dd:DragDrop.IsDragSource="True"
+                          dd:DragDrop.IsDropTarget="True"
+                          dd:DragDrop.DropHandler="{Binding DropHandler}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+        </ScrollViewer>
+        <Label Grid.Row="5"
+               Name="LblErrorShortcut"
+               Content="Error Message"
+               Foreground="Red"
+               Padding="0"
+               HorizontalContentAlignment="Center"
+               VerticalContentAlignment="Center"
+               Visibility="Hidden" />
+        <Grid Grid.Row="6">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+            <StackPanel Name="BtnAddShortcut"
+                        Background="Transparent"
+                        AllowDrop="True"
+                        MouseEnter="BtnAddShortcut_MouseEnter"
+                        MouseLeave="BtnAddShortcut_MouseLeave"
+                        MouseLeftButtonUp="BtnAddShortcut_MouseUp"
+                        Drop="BtnAdd_Drop">
+                <Image Source="/Shortcutgroups;component/Resources/AddWhite.png"
+                       Height="40"
+                       Width="40"
+                       Margin="0,10,0,0" />
+                <Label Content="Add shortcuts"
+                       Foreground="White"
+                       Padding="0"
+                       FontSize="16"
+                       HorizontalContentAlignment="Center" />
+            </StackPanel>
+            <StackPanel Grid.Column="2"
+                        Name="BtnAddFolder"
+                        Background="Transparent"
+                        AllowDrop="True"
+                        MouseEnter="BtnAddFolder_MouseEnter"
+                        MouseLeave="BtnAddFolder_MouseLeave"
+                        MouseLeftButtonUp="BtnAddFolder_MouseUp"
+                        Drop="BtnAdd_Drop">
+                <Image Source="/Shortcutgroups;component/Resources/AddWhite.png"
+                       Height="40"
+                       Width="40"
+                       Margin="0,10,0,0" />
+                <Label Content="Add folder as shortcut"
+                       Foreground="White"
+                       Padding="0"
+                       FontSize="16"
+                       HorizontalContentAlignment="Center" />
+            </StackPanel>
+        </Grid>
+        <Separator Grid.Row="7"
+                   Background="White" />
+        <Grid Grid.Row="8">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="85" />
+                <ColumnDefinition Width="65" />
+                <ColumnDefinition Width="90" />
+                <ColumnDefinition Width="90" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="33" />
+                <RowDefinition Height="29" />
+                <RowDefinition Height="29" />
+                <RowDefinition Height="29" />
+                <RowDefinition Height="29" />
+            </Grid.RowDefinitions>
+            <Label Grid.ColumnSpan="5"
+                   Content="Background Color"
+                   Foreground="White"
+                   Padding="0"
+                   FontSize="20" />
+            <RadioButton Grid.Row="1"
+                         GroupName="backroundColor"
+                         Name="RadLight"
+                         Content="Light"
+                         Foreground="White"
+                         FontSize="16"
+                         VerticalContentAlignment="Center"
+                         IsChecked="True"
+                         Click="RadLight_Click" />
+            <RadioButton Grid.Row="2"
+                         GroupName="backroundColor"
+                         Name="RadDark"
+                         Content="Dark"
+                         Foreground="White"
+                         FontSize="16"
+                         VerticalContentAlignment="Center"
+                         Click="RadDark_Click" />
+            <RadioButton Grid.Row="3"
+                         Grid.ColumnSpan="2"
+                         GroupName="backroundColor"
+                         Name="RadWindowsTheme"
+                         Content="Windows theme"
+                         Foreground="White"
+                         FontSize="16"
+                         VerticalContentAlignment="Center"
+                         Click="RadWindowsTheme_Click" />
+            <RadioButton Grid.Row="1"
+                         Grid.Column="2"
+                         Grid.ColumnSpan="2"
+                         GroupName="backroundColor"
+                         Name="RadWindowsAccentColor"
+                         Content="Windows accent color"
+                         Foreground="White"
+                         FontSize="16"
+                         VerticalContentAlignment="Center"
+                         Click="RadWindowsAccentColor_Click" />
+            <RadioButton Grid.Row="2"
+                         Grid.Column="2"
+                         GroupName="backroundColor"
+                         Name="RadCustom"
+                         Content="Custom"
+                         Foreground="White"
+                         FontSize="16"
+                         VerticalContentAlignment="Center"
+                         Click="RadCustom_Click" />
+            <xctk:ColorPicker Grid.Row="2"
+                              Grid.Column="3"
+                              x:Name="ClrCustomColor"
+                              MaxDropDownWidth="400"
+                              IsEnabled="False"
+                              ShowTabHeaders="False"
+                              ColorMode="ColorCanvas"
+                              Foreground="White"
+                              BorderBrush="Transparent"
+                              DropDownBackground="#FF05050A"
+                              DropDownBorderBrush="White"
+                              HeaderBackground="#FF05050A"
+                              HeaderForeground="White"
+                              TabBackground="#FF05050A"
+                              TabForeground="White"
+                              UsingAlphaChannel="False"
+                              SelectedColorChanged="ClrCustomColor_SelectedColorChanged" />
+            <Label Grid.Row="4"
+                   Content="Opacity"
+                   Foreground="White"
+                   FontSize="16" />
+            <Label Grid.Row="4"
+                   Grid.Column="1"
+                   Name="LblOpacity"
+                   Content="{Binding ElementName=SldOpacity, Path=Value, UpdateSourceTrigger=PropertyChanged}"
+                   Foreground="White"
+                   FontSize="16"></Label>
+            <Slider Grid.Row="4"
+                    Grid.Column="2"
+                    Grid.ColumnSpan="3"
+                    Name="SldOpacity"
+                    Value="100"
+                    Minimum="1"
+                    Maximum="100"
+                    IsMoveToPointEnabled="True"
+                    IsSnapToTickEnabled="True"
+                    MouseLeftButtonUp="SldOpacity_MouseUp"
+                    Thumb.DragCompleted="SldOpacity_DragCompleted" />
+        </Grid>
+        <Separator Grid.Row="9"
+                   Background="White" />
+        <StackPanel Grid.Row="10"
+                    Orientation="Horizontal"
+                    FlowDirection="RightToLeft">
+            <Label Name="BtnSave"
+                   Content="Save"
+                   Foreground="White"
+                   Background="#FF282832"
+                   FontSize="16"
+                   Height="30"
+                   Width="100"
+                   HorizontalContentAlignment="Center"
+                   MouseEnter="BtnSave_MouseEnter"
+                   MouseLeave="BtnSave_MouseLeave"
+                   MouseLeftButtonUp="BtnSave_MouseUp" />
+            <Label Name="BtnAbort"
+                   Content="Abort"
+                   Foreground="Black"
+                   Background="#FFC8C8D2"
+                   FontSize="16"
+                   Height="30"
+                   Width="100"
+                   HorizontalContentAlignment="Center"
+                   Margin="10,0,0,0"
+                   MouseEnter="BtnAbort_MouseEnter"
+                   MouseLeave="BtnAbort_MouseLeave"
+                   MouseLeftButtonUp="BtnAbort_MouseUp" />
+            <Label Name="BtnDelete"
+                   Content="Delete"
+                   Foreground="Red"
+                   Background="#FFC8C8D2"
+                   FontSize="16"
+                   Height="30"
+                   Width="100"
+                   HorizontalContentAlignment="Center"
+                   Margin="10,0,0,0"
+                   MouseEnter="BtnDelete_MouseEnter"
+                   MouseLeave="BtnDelete_MouseLeave"
+                   MouseLeftButtonUp="BtnDelete_MouseUp" />
+        </StackPanel>
+    </Grid>
+</UserControl>

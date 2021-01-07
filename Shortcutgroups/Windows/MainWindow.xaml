@@ -1,0 +1,67 @@
+﻿<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="Shortcutgroups.Windows.MainWindow"
+        Title="Shortcutgroups"
+        Height="800"
+        Width="800"
+        MinHeight="800"
+        MinWidth="800"
+        Background="#FF05050A"
+        Loaded="Window_Loaded">
+    <Window.Resources>
+        <Style TargetType="Image">
+            <Setter Property="RenderOptions.BitmapScalingMode"
+                    Value="HighQuality" />
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+        <DockPanel LastChildFill="False"
+                   Background="#FF14141B">
+            <StackPanel DockPanel.Dock="Top"
+                        Name="Tabs">
+                <Border Name="BtnGettingStarted"
+                        Height="40"
+                        MouseEnter="BtnGettingStarted_MouseEnter"
+                        MouseLeave="BtnGettingStarted_MouseLeave"
+                        MouseLeftButtonUp="BtnGettingStarted_MouseUp">
+                    <TextBlock Text="Getting Started"
+                               FontSize="16"
+                               Foreground="White"
+                               TextAlignment="Center"
+                               VerticalAlignment="Center" />
+                </Border>
+                <Border Name="BtnGroupOverview"
+                        Height="40"
+                        MouseEnter="BtnGroupOverview_MouseEnter"
+                        MouseLeave="BtnGroupOverview_MouseLeave"
+                        MouseLeftButtonUp="BtnGroupOverview_MouseUp">
+                    <TextBlock Text="Group Overview"
+                               FontSize="16"
+                               Foreground="White"
+                               TextAlignment="Center"
+                               VerticalAlignment="Center" />
+                </Border>
+            </StackPanel>
+            <Grid DockPanel.Dock="Bottom"
+                  Margin="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Image Name="BtnSettings" Source="/Shortcutgroups;component/Resources/SettingsWhite.png"
+                       Margin="0,0,0,10" MouseLeftButtonUp="BtnSettings_MouseLeftButtonUp" />
+                <Label Grid.Row="1" Name="LblCurrentVersion"
+                       Content="0.0.0.0"
+                       Foreground="DarkGray"
+                       FontSize="14"
+                       Padding="0" HorizontalContentAlignment="Center" />
+            </Grid>
+        </DockPanel>
+        <Border Grid.Column="2"
+                Name="Content" />
+    </Grid>
+</Window>
